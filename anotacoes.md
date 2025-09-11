@@ -169,3 +169,7 @@ const numeros = [1, 2, 3, 4];
 const cubo = numeros.map((n) => n * n * n);
 console.log(cubo);
 
+
+function conectar(host = "localhost", porta = 8080) {
+    //todo
+}
