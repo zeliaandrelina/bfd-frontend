@@ -260,4 +260,38 @@ console.log(somaDasIdades);
 
 //ex3:
 
+const users = [
+    {
+        name: "Ana Souza",
+        age: 28,
+        contact: "55 11 91234-5678",
+        city: "São Paulo",
+    },
+    {
+        name: "Carlos Mendes",
+        age: 15,
+        contact: "55 11 99876-5432",
+        city: "São Paulo",
+    },
+    {
+        name: "Fernanda Lima",
+        age: 12,
+        contact: "55 31 98765-4321",
+        city: "Belo Horizonte",
+    },
+    {
+        name: "Mariana Costa",
+        age: 25,
+        contact: "55 71 99888-1122",
+        city: "Salvador",
+    },
+];
+
+// Filtra os usuários com idade maior ou igual a 25 anos
+const maiorQueVinteCinco = users.filter((user) => user.age >= 25);
+
+// Exibe no console o array com os usuários filtrados
+console.log(maiorQueVinteCinco);
+
+
 
