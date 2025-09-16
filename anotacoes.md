@@ -172,7 +172,7 @@ console.log(cubo);
 
 //Aula 16.09.2025
 
-//ex:
+//ex1:
 const users = [
     {
         name: "Ana Souza",
@@ -217,5 +217,47 @@ const contagem = users.reduce((acc, user) => {
 
 console.log(contagem);
 
+
+//ex2:
+const users = [
+    {
+        name: "Ana Souza",
+        age: 28,
+        contact: "55 11 91234-5678",
+        city: "São Paulo",
+    },
+    {
+        name: "Carlos Mendes",
+        age: 15,
+        contact: "55 11 99876-5432",
+        city: "São Paulo",
+    },
+    {
+        name: "Fernanda Lima",
+        age: 12,
+        contact: "55 31 98765-4321",
+        city: "Belo Horizonte",
+    },
+    {
+        name: "Mariana Costa",
+        age: 25,
+        contact: "55 71 99888-1122",
+        city: "Salvador",
+    },
+];
+//objeto: vazio = {}
+//callback: (acc, user) => {...}
+
+const somaDasIdades = users.reduce((acc, user, index, array) => {
+    acc += user.age;
+    if (index === array.length - 1) {
+        return acc / array.length;
+    }
+    return acc;
+}, 0);
+console.log(somaDasIdades);
+//const mediaDasIdades = somaDasIdades / users.length;
+
+//ex3:
 
 
