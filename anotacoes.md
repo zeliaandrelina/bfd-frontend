@@ -295,3 +295,27 @@ console.log(maiorQueVinteCinco);
 
 
 
+//ex4:
+// Função saudacao recebe um parâmetro 'nome'
+function saudacao(nome) {
+    // Cria uma mensagem personalizada usando template string
+    const mensagem = `olá, ${nome}`;
+
+    // Define uma função interna que acessa a variável 'mensagem'
+    function mostrarSaudacao() {
+        console.log(mensagem); // Imprime a mensagem no console
+    }
+
+    // Retorna a função interna sem executá-la ainda
+    return mostrarSaudacao;
+}
+
+// Cria uma constante que armazena a função retornada por saudacao
+const olaHeitor = saudacao("Heitor");
+
+// Executa a função armazenada, que imprime "olá, Heitor"
+olaHeitor();
+
+
+
+
