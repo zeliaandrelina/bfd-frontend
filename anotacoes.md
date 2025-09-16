@@ -170,6 +170,52 @@ const cubo = numeros.map((n) => n * n * n);
 console.log(cubo);
 
 
-function conectar(host = "localhost", porta = 8080) {
-    //todo
-}
+//Aula 16.09.2025
+
+//ex:
+const users = [
+    {
+        name: "Ana Souza",
+        age: 28,
+        contact: "55 11 91234-5678",
+        city: "São Paulo",
+    },
+    {
+        name: "Carlos Mendes",
+        age: 15,
+        contact: "55 11 99876-5432",
+        city: "São Paulo",
+    },
+    {
+        name: "Fernanda Lima",
+        age: 12,
+        contact: "55 31 98765-4321",
+        city: "Belo Horizonte",
+    },
+    {
+        name: "Mariana Costa",
+        age: 25,
+        contact: "55 71 99888-1122",
+        city: "Salvador",
+    },
+];
+//objeto: vazio = {}
+//callback: (acc, user) => {...}
+
+const contagem = users.reduce((acc, user) => {
+    // Se a cidade ainda não existe no acumulador, inicializa com 0
+    if (!acc[user.city]) {
+        acc[user.city] = 0;
+    }
+
+    // Incrementa 1 para essa cidade
+    acc[user.city] += 1;
+
+    // Retorna o acumulador atualizado para a próxima iteração
+    return acc;
+}, {});
+
+console.log(contagem);
+
+
+
