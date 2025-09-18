@@ -66,6 +66,7 @@ console.log(p1);
 
 
 *Aula 11.09.2025
+
 ////varer um item usando o for classico //for estrutura de repetições
 //const frutas = ["maça", "banana", "uva"]; // vetor ou array
 ////for classico
@@ -315,6 +316,221 @@ const olaHeitor = saudacao("Heitor");
 
 // Executa a função armazenada, que imprime "olá, Heitor"
 olaHeitor();
+
+
+Aula 18.09.2025
+
+Ex1:
+// Declara um objeto JavaScript chamado 'usuario' com três propriedades
+const usuario = {
+    // id do usuário
+    id: 1,
+    // nome do usuário
+    nome: "Maria",
+    // indica se o usuário está ativo ou não (booleano)
+    ativo: true,
+};
+
+// Converte o objeto 'usuario' para uma string no formato JSON
+const jsonString = JSON.stringify(usuario);
+
+// Exibe o objeto original no console (ainda como objeto JS, não como string JSON)
+console.log(usuario);
+
+
+//JSON.stringify(usuario) transforma o objeto em uma string JSON como esta: {"id":1,"nome":"Maria","ativo":true}
+//console.log(usuario) imprime o objeto original, e não a string convertida.
+
+
+Ex2:
+// Declaração de um objeto JavaScript chamado 'usuario'
+const usuario = {
+    // Comentário indicando que é um objeto JS
+    // Propriedade 'id' com valor numérico 1
+    id: 1,
+    // Propriedade 'nome' com valor string "Maria"
+    nome: "Maria",
+    // Propriedade 'ativo' com valor booleano true
+    ativo: true,
+};
+
+// Converte o objeto 'usuario' em uma string JSON formatada
+// Parâmetros:
+// - usuario: o objeto a ser convertido
+// - null: sem função de substituição (replacer)
+// - 4: número de espaços usados para identação (formatação mais legível)
+const jsonString = JSON.stringify(usuario, null, 4);
+
+// Exibe a string JSON formatada no console
+console.log(jsonString);
+
+
+Ex3:
+// Declaração de um objeto JavaScript chamado 'usuario'
+const usuario = {
+    // Comentário indicando que é um objeto JS
+    id: 1,                   // Propriedade numérica
+    nome: "Maria",           // Propriedade string
+    ativo: true,             // Propriedade booleana
+};
+
+// Converte o objeto 'usuario' em uma string JSON
+const jsonString = JSON.stringify(usuario);
+
+// Exibe a string JSON no console
+console.log(jsonString);    // Resultado: '{"id":1,"nome":"Maria","ativo":true}'
+
+// Declara uma string que simula um JSON recebido de alguma fonte externa (ex: API, arquivo, etc.)
+const jsonRecebido = '{"id":1, "nome": "Maria", "ativo": true}';
+
+try {
+    // Tenta converter (parsear) a string JSON para um objeto JavaScript
+    const dados = JSON.parse(jsonRecebido);
+
+    // Acessa e exibe a propriedade 'nome' do objeto convertido
+    console.log(dados.nome);    // Resultado: "Maria"
+
+    // Acessa e exibe a propriedade 'ativo' do objeto convertido
+    console.log(dados.ativo);   // Resultado: true
+
+} catch (e) {
+    // Em caso de erro ao fazer o parse (ex: JSON malformado), exibe mensagem de erro no console
+    console.error("Erro ao processar json:", e.message);
+}
+
+
+//O que esse código faz no geral:
+//Cria um objeto JavaScript (usuario).
+//Converte esse objeto para o formato JSON (string).
+//Simula o recebimento de uma string JSON (jsonRecebido).
+//Usa JSON.parse() para converter essa string de volta em objeto JS.
+//Acessa propriedades do objeto convertido (nome e ativo).
+//Usa um bloco try...catch para tratar possíveis erros caso o JSON esteja malformado.
+
+ex4:
+// Comentário indicando que será feita uma requisição GET
+//GET
+
+// Declaração de uma função assíncrona chamada 'buscarUsuarios'
+async function buscarUsuarios() {
+    try {
+        // Faz uma requisição HTTP GET para o endpoint da API
+        const res = await fetch("https://jsonplaceholder.typicode.com/users/");
+
+        // Verifica se a resposta da requisição não foi bem-sucedida (status diferente de 200–299)
+        if (!res.ok) {
+            // Lança um erro com o código de status HTTP
+            throw new Error(`Erro HTPP: ${res.status}`);
+        }
+
+        // Converte o corpo da resposta em JSON (aguarda a conversão)
+        const dados = await res.json();
+
+        // Exibe os dados obtidos no console
+        console.log(dados);
+
+    } catch (erro) {
+        // Caso ocorra algum erro (na requisição ou no parse), exibe mensagem de erro no console
+        console.error("Erro ao buscar usuarios:", erro.message);
+    }
+}
+
+// Chamada da função 'buscarUsuarios' para iniciar a requisição
+buscarUsuarios();
+
+//O que esse código faz no geral:
+//Usa fetch() para fazer uma requisição GET para a URL da API jsonplaceholder, que retorna uma lista de usuários fictícios.
+//Usa await para esperar a resposta e depois converter o resultado para JSON.
+//Se a resposta não for OK (por exemplo, 404 ou 500), lança um erro personalizado.
+//Se tudo correr bem, imprime os dados no console.
+//Se algo der errado (erro de rede, erro no JSON, etc.), o catch captura e mostra a mensagem de erro.
+
+
+Ex5:
+// Declaração de uma função assíncrona chamada 'buscarUsuarios', que recebe um parâmetro 'id'
+async function buscarUsuarios(id) {
+    try {
+        // Faz uma requisição HTTP GET para a API, usando o ID recebido na URL
+        const res = await fetch(
+            `https://jsonplaceholder.typicode.com/users/${id}`
+        );
+
+        // Verifica se a resposta da requisição foi bem-sucedida (códigos 200–299)
+        if (!res.ok) {
+            // Se não for, lança um erro com o código de status da resposta
+            throw new Error(`Erro HTPP: ${res.status}`);
+        }
+
+        // Aguarda a conversão do corpo da resposta para JSON
+        const dados = await res.json();
+
+        // Exibe no console apenas o nome do usuário retornado
+        console.log("nome:", dados.name);
+
+        // Linha comentada que poderia exibir todo o objeto de dados recebido
+        // console.log(dados);
+
+    } catch (erro) {
+        // Se ocorrer qualquer erro (na requisição ou no parse), exibe uma mensagem no console
+        console.error("Erro ao buscar usuarios:", erro.message);
+    }
+}
+
+// Chamada da função, passando o ID do usuário que deseja buscar (nesse caso, 1)
+buscarUsuarios(1);
+
+
+//O que esse código faz:
+//Acessa a API pública jsonplaceholder.typicode.com para buscar o usuário com o ID informado.
+//Se o usuário com o ID existir, exibe no console o nome dele.
+//Se ocorrer erro (ex: ID inválido, sem internet, erro da API), exibe uma mensagem de erro.
+
+
+Ex6:
+// GET
+
+// Função assíncrona que busca dados de um usuário por ID
+async function buscarUsuarios(id) {
+    try {
+        // Faz a requisição GET para a API, com o ID especificado
+        const res = await fetch(
+            `https://jsonplaceholder.typicode.com/users/${id}`
+        );
+
+        // Verifica se a resposta não foi bem-sucedida (status fora da faixa 200-299)
+        if (!res.ok) {
+            throw new Error(`Erro HTTP: ${res.status}`);
+        }
+
+        // Converte o corpo da resposta em JSON
+        const dados = await res.json();
+
+        // Verifica se o objeto retornado está vazio (usuário não encontrado)
+        if (!dados.name) {
+            throw new Error("Usuário não encontrado.");
+        }
+
+        // Exibe no console o nome do usuário
+        console.log("nome:", dados.name);
+
+        // (Opcional) Exibir todos os dados
+        // console.log(dados);
+
+    } catch (erro) {
+        // Trata erros de conversão JSON (não acontece nesse exemplo, mas é uma boa prática)
+        if (erro.name === "SyntaxError") {
+            console.error("Erro ao converter JSON:", erro.message);
+        }
+
+        // Exibe qualquer outro erro ocorrido
+        console.error("Erro ao buscar usuário:", erro.message);
+    }
+}
+
+// Chamada da função com um ID inválido (-1)
+buscarUsuarios(-1);
+
+
 
 
 
