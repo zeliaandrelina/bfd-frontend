@@ -1,4 +1,4 @@
-*Aula 09.09.2025
+***Aula 09.09.2025***
 
 ex1:
 let nome = "Helio";
@@ -65,7 +65,7 @@ console.log(p1);
 
 
 
-*Aula 11.09.2025
+***Aula 11.09.2025***
 
 ////varer um item usando o for classico //for estrutura de repetições
 //const frutas = ["maça", "banana", "uva"]; // vetor ou array
@@ -171,7 +171,7 @@ const cubo = numeros.map((n) => n * n * n);
 console.log(cubo);
 
 
-//Aula 16.09.2025
+***Aula 16.09.2025***
 
 //ex1:
 const users = [
@@ -318,7 +318,7 @@ const olaHeitor = saudacao("Heitor");
 olaHeitor();
 
 
-Aula 18.09.2025
+***Aula 18.09.2025***
 
 Ex1:
 // Declara um objeto JavaScript chamado 'usuario' com três propriedades
@@ -486,7 +486,7 @@ buscarUsuarios(1);
 //Se ocorrer erro (ex: ID inválido, sem internet, erro da API), exibe uma mensagem de erro.
 
 
-Ex6:
+
 // GET
 
 // Função assíncrona que busca dados de um usuário por ID
@@ -529,6 +529,96 @@ async function buscarUsuarios(id) {
 
 // Chamada da função com um ID inválido (-1)
 buscarUsuarios(-1);
+
+
+Ex7:
+// 1. Array original
+const numeros = [1, 2, 3, 4];
+
+// 2. Somar todos os números do array usando reduce
+const soma = numeros.reduce((acumulador, numero) => acumulador + numero, 0);
+console.log("Soma dos números:", soma);
+
+// 3. Criar um novo array com o cubo de cada número usando map
+const cubos = numeros.map((numero) => numero ** 3);
+console.log("Cubos dos números:", cubos);
+
+// 4. Função para retornar o cubo de um valor individual
+const cuboValor = (numero) => numero ** 3;
+console.log("Cubo de 5:", cuboValor(5));
+
+***Boas práticas aplicadas:
+Usar nomes claros (numero, acumulador, cuboValor, etc.).
+Separar cada operação com comentários descritivos.
+Usar const para variáveis que não serão reatribuídas.
+Utilizar ** (exponenciação), que é mais legível e moderno.
+
+
+***Aula 23.09.2025***
+
+Ex1:
+//THEN()
+//ASYNC/AWAIT !!!
+
+// Importa a classe LocalStorage do pacote 'node-localstorage'
+// Isso é necessário porque 'localStorage' só existe no navegador
+const { LocalStorage } = require("node-localstorage");
+
+// Cria uma instância do localStorage que salva os dados na pasta ./dados
+const localStorage = new LocalStorage("./dados");
+
+// Função assíncrona para carregar dados de uma API e armazená-los localmente
+async function carregarDados() {
+    try {
+        // Faz três requisições paralelas usando Promise.all
+        const [posts, comments, users] = await Promise.all([
+            // Busca os posts
+            fetch("https://jsonplaceholder.typicode.com/posts").then((res) =>
+                res.json()
+            ),
+            // Busca os comentários
+            fetch("https://jsonplaceholder.typicode.com/comments").then((res) =>
+                res.json()
+            ),
+            // Busca os usuários
+            fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
+                res.json()
+            ),
+        ]);
+
+        // Armazena os dados no localStorage como strings
+        localStorage.setItem("posts", JSON.stringify(posts));
+        localStorage.setItem("comments", JSON.stringify(comments));
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Recupera os posts do localStorage e converte para objeto
+        const postsSalvos = JSON.parse(localStorage.getItem("posts"));
+
+        // Exibe o título de cada post no terminal
+        postsSalvos.forEach((post) => {
+            console.log(post.title);
+        });
+
+        // Exibe todos os dados completos no console (pode gerar muitos dados)
+        console.log(posts, comments, users);
+    } catch (erro) {
+        // Captura e exibe erros (como falha de rede, etc.)
+        console.error("Erro ao carregar dados:", erro);
+    }
+}
+
+// Chama a função para executar
+carregarDados();
+
+
+O que vai acontecer ao rodar:
+Os dados serão buscados da API JSONPlaceholder.
+Eles serão salvos localmente em arquivos na pasta ./dados (como posts, comments, users).
+O terminal irá imprimir:
+O título de cada post (100 no total).
+Todos os dados de posts, comments, e users (em arrays grandes).
+
+
 
 
 
