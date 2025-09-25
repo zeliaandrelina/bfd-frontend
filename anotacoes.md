@@ -620,6 +620,69 @@ Todos os dados de posts, comments, e users (em arrays grandes).
 
 
 
+***Aula 25.09.20.25***
+
+//pasta criada services
+
+//arquivo postService.js (dentro de services)
+export async function fetchPosts() {
+    try {
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com/posts"
+        );
+        if (!response.ok) throw new Error("Erro ao buscar os posts");
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
+
+//arquivo userService.js (dentro de services)
+export async function fetchUsers() {
+    try {
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com/users"
+        );
+        if (!response.ok) throw new Error("Erro ao buscar os usuarios");
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
+
+
+//main.js (dentro da raiz)
+import { fetchPosts } from "./services/postService.js";
+import { fetchUsers } from "./services/userService.js";
+
+async function main() {
+    try {
+        //Requisições em paralelo
+        const [posts, users] = await Promise.all([fetchPosts(), fetchUsers()]);
+
+        console.log("Total de posts:", posts.length);
+        console.log("Total de users:", users.length);
+
+        //O Primeiro autorde um post.
+        const firstPostAuthor =
+            users.find((user) => user.id === posts[0]?.userId)?.name ??
+            "Autor desconhecido";
+        console.log("Autor:", firstPostAuthor);
+
+        //posts[0]
+    } catch (error) {
+        console.error("Erro:", error);
+    }
+}
+main();
+
+
+
+
 
 
 
