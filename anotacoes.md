@@ -681,6 +681,85 @@ async function main() {
 main();
 
 
+***Aula 30.09.2025***
+
+*index.html
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class= "bg-gray-100 p-8 font-sans">
+    <h1>Inserir Itens da Lista:</h1>
+    <p id="mensagem-vazia" class="hildden md-4">Não há mais itens</p>
+    <h1 id="titulo" class="text-3xl font-bold text-blue-600 mb-4 transition-all dur
+        Lista Dinâmica"</h1>
+    <ul id="minha-lista" class="list-disc pl-6 mb-4">
+        <li class="item-lista"> Item 1 </li>
+        <li class="item-lista"> Item 2 </li>
+        <li class="item-lista"> Item 3 </li>
+    </ul>
+    
+    <form id="form-lista">
+        <button id="adicionar" class="bg-text-blue-500 houver:bg-text-blue-600
+    text-white font-semibold py-2 px-4 rounded">
+    Adicionar 
+        </button>
+    <br>
+        <button id="remover" class="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
+        Remover 
+        </button> 
+    </form>
+    
+    <script src="script.js"></script>
+    </body>   
+</html>
+
+
+*script.js
+//Selecionar os elementos
+const lista = document.querySelector("#minha-lista");
+const botaoAdd = document.getElementById("adicionar");
+const botaoRemove = document.getElementById("remover");
+const msgVazia = document.getElementById("mensagem-vazia");
+const form = document.getElementById("form-lista");
+
+form.addEventListener('submit', (event)=>{
+    event.preventDefault();
+}
+
+// Adicionar item
+botaosAdicionar.addEventListener("click", () => {
+    const newItem = document.createElement("li");
+    //newItem.classList.add("text-gray-500");
+    newItem.textContent = `Item ${lista.children.length + 1}`;
+    lista.appendChild(newItem);
+    //verificarListavazia();
+});
+
+// Remover último item
+botaoRemove.addEventListener("click", () => {
+    const ultimoItem = lista.lastElementChild;
+    if (ultimoItem) {
+        lista.removeChild(ultimoItem);
+    }
+    //verificarListavazia();
+});
+
+function verificarListavazia() {
+    if (lista.children.length === 0) {
+        msgVazia.classList.remove("hidden");
+    } else {
+        msgVazia.classList.add("hidden");
+    }
+}
+
+
+
+
 
 
 
