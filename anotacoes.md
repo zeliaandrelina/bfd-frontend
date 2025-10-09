@@ -758,6 +758,90 @@ function verificarListavazia() {
 }
 
 
+***Aula 09.10.2025***
+//Criou dentro de SRC uma pasta co nome components e dentro de components dois arquivos: ProductCard.jsx e ProductList.jsx
+// 
+
+***Arquivo ProductCard.jsx
+
+//crie um componente ProductCard que receba via props
+//`name` (nome do produto)
+//`price`(preço)
+//`image` (URL da imagem)
+//E use dentro de um `ProductList`
+//para redenrizar vários produtos.
+
+// Define o componente funcional ProductCard que recebe props desestruturadas: name, price e image
+function ProductCard({ name, price, image }) {
+    // Retorna o JSX que representa o cartão do produto
+    return (
+        <>
+            {/* Exibe o nome do produto em um título de nível 2 */}
+            <h2>{name}</h2>
+
+            {/* Exibe o preço do produto em um título de nível 3, com o símbolo de R$ */}
+            <h3>R$ {price}</h3>
+
+            {/* Exibe a imagem do produto. O src vem da prop 'image' e o alt usa o nome do produto */}
+            <img src={image} alt={name} />
+        </>
+    );
+}
+
+
+Explicação extra (se quiser entender mais profundamente):
+function ProductCard({ name, price, image }): Isso é desestruturação de props. Em vez de acessar props.name, props.price, etc., você pega diretamente os valores.
+<> ... </>: Fragmento React. É uma forma de retornar múltiplos elementos sem adicionar um elemento pai extra no DOM (como uma <div>).
+alt={name}: Isso é importante para acessibilidade e também ajuda no SEO (caso essa página esteja na web).
+Se quiser que o componente fique visualmente mais bonito, posso te ajudar a adicionar estilos CSS também.
+
+
+
+// Exporta o componente ProductCard para que possa ser importado em outros arquivos
+export default ProductCard;
+
+
+***Arquivo ProductList.jsx
+
+// Importa o componente ProductCard do arquivo "./ProductCard"
+import ProductCard from "./ProductCard";
+
+// Define o componente funcional ProductList
+function ProductList() {
+    // Declara um array de objetos, onde cada objeto representa um produto com nome, preço e imagem
+    const products = [
+        {
+            name: "Notebook", // Nome do produto
+            price: 4000, // Preço do produto
+            image: "https://via.placeholder.com/200x150?text=NotebooK", // URL da imagem do produto
+        },
+        {
+            name: "Smartphone", // Nome do segundo produto
+            price: 3000, // Preço do segundo produto
+            image: "https://via.placeholder.com/200x150?text=Smartphone", // URL da imagem do segundo produto
+        },
+    ];
+
+    // Retorna a renderização do componente
+    return (
+        <>
+            {/* Itera sobre o array de produtos e renderiza um ProductCard para cada item */}
+            {products.map((product) => (
+                <ProductCard
+                    name={product.name} // Passa o nome do produto como prop para o ProductCard
+                    price={product.price} // Passa o preço do produto como prop para o ProductCard
+                    image={product.image} // Passa a imagem do produto como prop para o ProductCard
+                />
+            ))}
+        </>
+    );
+}
+
+// Exporta o componente ProductList para ser utilizado em outros arquivos
+export default ProductList;
+
+
+
 
 
 
